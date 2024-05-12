@@ -1,2 +1,3 @@
-poetry install 
+poetry install
+
 poetry run python src
