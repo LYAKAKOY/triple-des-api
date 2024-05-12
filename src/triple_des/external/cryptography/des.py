@@ -516,7 +516,7 @@ def generate_keys(intitial_state):
     key_schedule = []
     left_half, right_half = permuted[0:28], permuted[28:56]
     for loop in range(16):
-        if {0, 1, 8, 15}.__contains__(loop):
+        if loop in {0, 1, 8, 15}:
             left_half, right_half = shifted(left_half, 1), shifted(right_half, 1)
         else:
             left_half, right_half = shifted(left_half, 2), shifted(right_half, 2)
