@@ -1,5 +1,5 @@
 from pydantic import BaseModel, StringConstraints, field_validator
-from typing import Annotated
+from typing import Annotated, Dict
 from fastapi import HTTPException, status
 
 
@@ -46,7 +46,7 @@ class CryptInput(BaseModel):
 class StepsDesCrypt(BaseModel):
     data_being: str
     after_initial_permutation: str
-    info_rounds: dict
+    info_rounds: Dict[int, Dict[str, str | int]]
     result: str
 
     def __init__(self, **kwargs):
