@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "triple-des-api"
+version = "0.1.0"
+description = ""
+authors = ["SimahovDA"]
+readme = "README.md"
+packages = [{include = "triple_des_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.111.0"
+pydantic = "^2.7.1"
+uvicorn = {extras = ["standart"], version = "^0.29.0"}
+loguru = "^0.7.2"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
