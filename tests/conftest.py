@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 
 from src.triple_des.create_app import create_app
 
-block = "1011001110110011011100101011101100000001011001101000111101100101"
+text = "Hello, my friend. How are you?"
 key = "3176F67A0DF673B4"
 
 key1 = "5CD037E0B49EAD24"
