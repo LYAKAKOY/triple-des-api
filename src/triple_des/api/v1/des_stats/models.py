@@ -1,5 +1,5 @@
-from pydantic import BaseModel, StringConstraints, field_validator
-from typing import Annotated, Dict
+from pydantic import BaseModel, ConfigDict, StringConstraints, field_validator
+from typing import Annotated
 from fastapi import HTTPException, status
 
 
@@ -25,15 +25,23 @@ class CryptInput(BaseModel):
             )
 
 
+class RoundInfo(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    round: 1
+    lefthalf: str
+    righthalf: str
+    subkey: str
+
+
 class StepsDesCrypt(BaseModel):
     block: str
     data_being: str
     after_initial_permutation: str
-    info_rounds: Dict[int, Dict[str, str | int]]
+    info_rounds: dict[int, RoundInfo]
     result: str
 
     def __init__(self, **kwargs):
-        kwargs["info_rounds"] = {i: kwargs.pop(str(i)) for i in range(15)}
+        kwargs["info_rounds"] = {i: RoundInfo(**kwargs.pop(str(i))) for i in range(15)}
         super().__init__(**kwargs)
 
 
