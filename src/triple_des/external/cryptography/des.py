@@ -2,6 +2,21 @@ from typing import Dict, Any
 from .exceptions import TextError, KeyError
 
 
+def binary_str_to_text(binary_str: str) -> str:
+    text = "".join(
+        chr(int(binary_str[i : i + 12], 2)) for i in range(0, len(binary_str), 12)
+    )
+    return text
+
+
+def text_to_binary_blocks(text: str) -> list[str]:
+    blocks = []
+    binary_text = "".join(bin(ord(s))[2:].zfill(12) for s in text)
+    for i in range(0, len(binary_text), 64):
+        blocks.append(binary_text[i : i + 64].ljust(64, "0"))
+    return blocks
+
+
 def xor(a: str, b: str) -> str:
     store = ""
     for i in range(len(a)):

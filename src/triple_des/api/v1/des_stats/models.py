@@ -4,28 +4,16 @@ from fastapi import HTTPException, status
 
 
 class CryptInput(BaseModel):
-    block: Annotated[str, StringConstraints(max_length=64, min_length=64)]
+    text: str
     key: Annotated[str, StringConstraints(max_length=16, min_length=16)]
 
     model_config = {
         "json_schema_extra": {
             "examples": [
-                {
-                    "block": "1011001110110011011100101011101100000001011001101000111101100101",
-                    "key": "3176F67A0DF673B4",
-                }
+                {"text": "Hi, my friend", "key": "3176F67A0DF673B4", "lang": "en"}
             ]
         }
     }
-
-    @field_validator("block")
-    def check_block(cls, value: str) -> str:
-        if set(value) != {"0", "1"}:
-            raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail="block must contains only 0 and 1",
-            )
-        return value
 
     @field_validator("key")
     def check_keys(cls, value: str) -> str:
@@ -48,3 +36,9 @@ class StepsDesCrypt(BaseModel):
     def __init__(self, **kwargs):
         kwargs["info_rounds"] = {i: kwargs.pop(str(i)) for i in range(15)}
         super().__init__(**kwargs)
+
+
+class ResultDesShow(BaseModel):
+    binary_text: str
+    steps: list[StepsDesCrypt]
+    result: str
