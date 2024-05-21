@@ -35,6 +35,7 @@ class CryptInput(BaseModel):
 
 
 class StepsDesCrypt(BaseModel):
+    block: str
     data_being: str
     after_initial_permutation: str
     info_rounds: Dict[int, Dict[str, str | int]]

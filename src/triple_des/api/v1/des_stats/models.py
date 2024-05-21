@@ -9,9 +9,7 @@ class CryptInput(BaseModel):
 
     model_config = {
         "json_schema_extra": {
-            "examples": [
-                {"text": "Hi, my friend", "key": "3176F67A0DF673B4", "lang": "en"}
-            ]
+            "examples": [{"text": "Hi, my friend", "key": "3176F67A0DF673B4"}]
         }
     }
 
@@ -28,6 +26,7 @@ class CryptInput(BaseModel):
 
 
 class StepsDesCrypt(BaseModel):
+    block: str
     data_being: str
     after_initial_permutation: str
     info_rounds: Dict[int, Dict[str, str | int]]

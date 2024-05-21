@@ -540,7 +540,7 @@ def generate_keys(intitial_state):
 
 
 def encrypt(message: str, key: str) -> Dict[str, Any]:
-    steps = {}
+    steps = {"block": message}
 
     if len(message) != 64:
         if len(message) == 16:
@@ -572,7 +572,7 @@ def encrypt(message: str, key: str) -> Dict[str, Any]:
 
 
 def decrypt(message: str, key: str) -> Dict[str, Any]:
-    steps = {}
+    steps = {"block": message}
 
     if len(message) != 64:
         if len(message) == 16:
